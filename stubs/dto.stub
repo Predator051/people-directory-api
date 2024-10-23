@@ -1,0 +1,19 @@
+<?php
+
+namespace {{ NAMESPACE }};
+
+use App\Contracts\DtoContract;
+
+readonly class {{ CLASS_NAME }} implements DtoContract
+{
+    public function __construct(
+    ) {}
+
+    public static function fromArray(array $data): {{ CLASS_NAME }} {
+
+    }
+
+    public function toArray(): array {
+        return [];
+    }
+}

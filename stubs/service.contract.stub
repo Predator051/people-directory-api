@@ -1,0 +1,10 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use $CONTRACT_INCLUDE$;
+
+class $CLASS_NAME$Service implements $CONTRACT_NAME$
+{
+
+}
