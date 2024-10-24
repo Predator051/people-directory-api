@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\ChurchData;
 use App\Models\Church;
 
+/// TODO replace data files on Request object
 class ChurchController extends Controller
 {
     public function store(ChurchData $data): ChurchData

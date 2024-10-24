@@ -6,6 +6,7 @@ use App\Http\Requests\Roles\CreateRoleRequest;
 use App\Http\Requests\Roles\UpdateRoleRequest;
 use App\Models\Role;
 
+/// TODO replace data files on Request object
 class RoleController extends Controller
 {
     public function store(CreateRoleRequest $request)

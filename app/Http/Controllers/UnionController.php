@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Data\UnionData;
 use App\Models\Union;
 
+/// TODO replace data files on Request object
 class UnionController extends Controller
 {
     public function store(UnionData $data): UnionData

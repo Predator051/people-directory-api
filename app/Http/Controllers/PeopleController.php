@@ -6,6 +6,8 @@ use App\Contracts\PeopleContract;
 use App\Data\PeopleData;
 use Illuminate\Http\JsonResponse;
 
+/// TODO replace data files on Request object
+/// TODO replace return object as Resource with auto loading attributes
 class PeopleController extends Controller
 {
     public function __construct(private readonly PeopleContract $personService)

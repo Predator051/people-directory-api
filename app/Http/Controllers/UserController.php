@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginUserRequest;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseCode;
 
+/// TODO replace data files on Request object
 class UserController extends Controller
 {
     public function __construct(private readonly UserContract $userService)
