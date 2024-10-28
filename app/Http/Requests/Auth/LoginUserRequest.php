@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Dto\LoginUserDto;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginUserRequest extends FormRequest
@@ -26,10 +25,5 @@ class LoginUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255'],
             'password' => ['required', 'string', 'min:8'],
         ];
-    }
-
-    public function Dto(): LoginUserDto
-    {
-        return LoginUserDto::fromArray($this->all());
     }
 }

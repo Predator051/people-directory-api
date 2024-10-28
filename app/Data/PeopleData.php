@@ -11,10 +11,10 @@ class PeopleData extends Data
 {
     public function __construct(
         public ?int $id,
-        #[MapInputName('attribute_values')]
-        #[MapOutputName('attribute_values')]
+        #[MapInputName('attributes')]
+        #[MapOutputName('attributes')]
         #[DataCollectionOf(AttributeValueData::class)]
-        public array $attributeValues
+        public array $attributes
     ) {
     }
 }

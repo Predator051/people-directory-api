@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\PeopleContract;
 use App\Data\PeopleData;
+use App\Http\Requests\People\CreatePeopleRequest;
 use Illuminate\Http\JsonResponse;
 
-/// TODO replace data files on Request object
-/// TODO replace return object as Resource with auto loading attributes
 class PeopleController extends Controller
 {
     public function __construct(private readonly PeopleContract $personService)
@@ -24,9 +23,10 @@ class PeopleController extends Controller
         return response()->json($this->personService->allByPaginate());
     }
 
-    public function create(PeopleData $data): JsonResponse
+    public function create(CreatePeopleRequest $request): JsonResponse
     {
-        $people = $this->personService->create($data);
+        ///TODO fix
+        $people = $this->personService->create(PeopleData::from($request->all()));
 
         return response()->json($people);
     }

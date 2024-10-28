@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\UserContract;
+use App\Data\UserData;
 use App\Http\Requests\Auth\CreateUserRequest;
 use App\Http\Requests\Auth\LoginUserRequest;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response as ResponseCode;
 
-/// TODO replace data files on Request object
 class UserController extends Controller
 {
     public function __construct(private readonly UserContract $userService)
@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function store(CreateUserRequest $request)
     {
-        $user = $this->userService->create($request->Dto());
+        $user = $this->userService->create(UserData::from($request->all()));
 
         return response()->json($user);
     }
@@ -50,7 +50,7 @@ class UserController extends Controller
 
     public function login(LoginUserRequest $request): JsonResponse
     {
-        if (!$token = $this->userService->login($request->Dto())) {
+        if (!$token = $this->userService->login(UserData::from($request->all()))) {
             return response()->json(['error' => 'Unauthorized'], ResponseCode::HTTP_UNAUTHORIZED);
         }
 

@@ -3,18 +3,17 @@
 namespace App\Services;
 
 use App\Contracts\UserContract;
-use App\Dto\CreateUserDto;
-use App\Dto\LoginUserDto;
+use App\Data\UserData;
 use App\Models\User;
 
 class UserService implements UserContract
 {
-    public function create(CreateUserDto $dto): User
+    public function create(UserData $dto): User
     {
         return User::create($dto->toArray());
     }
 
-    public function login(LoginUserDto $dto): string|bool
+    public function login(UserData $dto): string|bool
     {
         return auth()->attempt($dto->toArray());
     }

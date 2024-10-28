@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\People;
 
-use App\Contracts\DtoContract;
-use App\Dto\CreatePeopleDto;
 use App\Rules\UniqueAttributes;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -52,10 +50,5 @@ class CreatePeopleRequest extends FormRequest
     private function isDate($value): bool
     {
         return strtotime($value) !== false;
-    }
-
-    public function dto(): DtoContract
-    {
-        return CreatePeopleDto::fromArray($this->all());
     }
 }

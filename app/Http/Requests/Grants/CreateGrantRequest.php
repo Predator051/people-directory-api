@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Grants;
 
-use App\Contracts\DtoContract;
-use App\Dto\CreateGrantDto;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,10 +31,5 @@ class CreateGrantRequest extends FormRequest
             'decline_write' => ['required', 'boolean'],
             'decline_history_read' => ['required', 'boolean'],
         ];
-    }
-
-    public function dto(): DtoContract
-    {
-        return CreateGrantDto::fromArray($this->all());
     }
 }

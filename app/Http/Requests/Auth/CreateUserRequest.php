@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Dto\CreateUserDto;
 use App\Exceptions\RegisterUserException;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
@@ -40,10 +39,5 @@ class CreateUserRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new RegisterUserException(response()->json($validator->errors(), 422));
-    }
-
-    public function Dto(): CreateUserDto
-    {
-        return CreateUserDto::fromArray($this->all());
     }
 }

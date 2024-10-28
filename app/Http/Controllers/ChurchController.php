@@ -2,41 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\ChurchData;
+use App\Http\Requests\Churches\CreateChurchRequest;
+use App\Http\Requests\Churches\UpdateChurchRequest;
 use App\Models\Church;
+use Illuminate\Http\JsonResponse;
 
 /// TODO replace data files on Request object
 class ChurchController extends Controller
 {
-    public function store(ChurchData $data): ChurchData
+    public function store(CreateChurchRequest $request): JsonResponse
     {
-        $church = Church::create($data->all())->load(['union']);
+        $church = Church::create($request->all())->load(['union']);
 
-        return ChurchData::from($church);
+        return response()->json($church);
     }
 
-    public function index(): mixed
+    public function index(): JsonResponse
     {
         $churches = Church::with(['union', 'address'])->get();
 
-        return ChurchData::collect($churches);
+        return response()->json($churches);
     }
 
-    public function get(int $id): ChurchData
+    public function get(int $id): JsonResponse
     {
-        return ChurchData::from(Church::with(['union', 'address'])->findOrFail($id));
+        return response()->json(Church::with(['union', 'address'])->findOrFail($id));
     }
 
-    public function update(ChurchData $data): ChurchData
+    public function update(int $id, UpdateChurchRequest $data): JsonResponse
     {
-        $union = Church::query()->where(['id' => $data->id])->update(
-            [
-                'name' => $data->name,
-                'address_id' => $data->address_id,
-                'union_id' => $data->union_id
-            ],
-        );
+        $union = Church::query()->where(['id' => $id])->update($data->all());
 
-        return $data;
+        return response()->json(Church::find($id));
     }
 }

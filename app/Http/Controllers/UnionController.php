@@ -2,32 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\UnionData;
+use App\Http\Requests\Unions\CreateUnionRequest;
+use App\Http\Requests\Unions\UpdateUnionRequest;
 use App\Models\Union;
+use Illuminate\Http\JsonResponse;
 
 /// TODO replace data files on Request object
 class UnionController extends Controller
 {
-    public function store(UnionData $data): UnionData
+    public function store(CreateUnionRequest $request): JsonResponse
     {
-        return UnionData::from(Union::create($data->all()));
+        return response()->json(Union::create($request->all()));
     }
 
-    public function index(): mixed
+    public function index(): JsonResponse
     {
-        return UnionData::collect(Union::all());
+        return response()->json(Union::all());
     }
 
-    public function get(int $id): UnionData
+    public function get(int $id): JsonResponse
     {
-        return UnionData::from(Union::findOrFail($id));
+        return response()->json(Union::findOrFail($id));
     }
 
     public function update(
-        UnionData $data
-    ): UnionData {
-        $union = Union::query()->where(['id' => $data->id])->update($data->all());
+        int $id,
+        UpdateUnionRequest $request
+    ): JsonResponse {
+        $union = Union::query()->where(['id' => $id])->update($request->all());
 
-        return UnionData::from(Union::find($data->id));
+        return response()->json(Union::find($id));
     }
 }

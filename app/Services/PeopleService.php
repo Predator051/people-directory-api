@@ -19,7 +19,7 @@ class PeopleService implements PeopleContract
         $newPeople = People::create();
 
         /** @var AttributeValueData $attribute */
-        foreach ($data->attributeValueData as $attribute) {
+        foreach ($data->attributes as $attribute) {
             $attributeModel = AttributeValueModelFactory::getModel(
                 AttributeType::from($attribute->attributeData->type)
             );

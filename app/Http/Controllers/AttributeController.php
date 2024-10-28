@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Data\AttributeData;
 use App\Enums\AttributeType;
+use App\Http\Requests\Attributes\CreateAttributeRequest;
 use App\Models\Attribute;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-/// TODO replace data files on Request object
 class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request): mixed
+    public function index(Request $request): JsonResponse
     {
         $filterByTitle = $request->query('title', '');
 
-        return AttributeData::collect(
+        return response()->json(
             Attribute::query()
                 ->whereLike('title', '%' . $filterByTitle . '%')
                 ->get()
@@ -28,9 +27,9 @@ class AttributeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(AttributeData $data): AttributeData
+    public function store(CreateAttributeRequest $request): JsonResponse
     {
-        return AttributeData::from(Attribute::create($data->all()));
+        return response()->json(Attribute::create($request->all()));
     }
 
     /**
